@@ -1,7 +1,7 @@
 import Navbar from "@/components/navbar";
 import { SubscriptionEntitlementQuery } from "@/convex/query.config";
-import { combinedSlug } from "@/lib/utils";
-import { redirect } from "next/navigation";
+// import { combinedSlug } from "@/lib/utils";
+// import { redirect } from "next/navigation";
 import React from "react";
 
 type Props = {
