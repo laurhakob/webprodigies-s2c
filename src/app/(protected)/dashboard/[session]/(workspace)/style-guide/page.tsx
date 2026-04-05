@@ -62,6 +62,7 @@
 
 // export default Page;
 
+import MoodBoard from "@/components/style/mood-board";
 import { ThemeContent } from "@/components/style/theme";
 import StyleGuideTypoghraphy from "@/components/style/typography";
 import { TabsContent } from "@/components/ui/tabs";
@@ -128,6 +129,10 @@ const Page = async ({ searchParams }: Props) => {
 
       <TabsContent value="typography">
         <StyleGuideTypoghraphy typographyGuide={typographyGuide} />
+      </TabsContent>
+
+       <TabsContent value="moodboard">
+        <MoodBoard guideImages={guideImages} />
       </TabsContent>
     </div>
   );
