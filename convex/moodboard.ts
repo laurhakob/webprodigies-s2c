@@ -32,7 +32,7 @@ export const getMoodBoardImages = query({
             uploading: false,
             index,
           };
-        } catch (error) {
+        } catch {
           return null;
         }
       })
