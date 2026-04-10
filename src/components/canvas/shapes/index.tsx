@@ -3,7 +3,7 @@ import { Arrow } from "./arrow"
 import { Elipse } from "./elipse"
 import { Rectangle } from "./rectangle"
 import { Line } from "./line"
-// import { Frame } from "./frame"
+ import { Frame } from "./frame"
 import { Stroke } from "./stroke"
 import { Text } from "./text"
 
@@ -21,13 +21,13 @@ const ShapeRenderer = ({
   exportDesign: (generatedUIId: string, element: HTMLElement | null) => void
 }) => {
   switch (shape.type) {
-    // case 'frame':
-    //   return (
-    //     <Frame
-    //       shape={shape}
-    //       toggleInspiration={toggleInspiration}
-    //     />
-    //   )
+    case 'frame':
+      return (
+        <Frame
+          shape={shape}
+          toggleInspiration={toggleInspiration}
+        />
+      )
     case 'rect':
       return <Rectangle shape={shape} />
     case 'ellipse':
