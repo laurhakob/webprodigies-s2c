@@ -32,9 +32,11 @@ export const ProjectApi = createApi({
     >({
       query: (data) => ({
         url: "",
-        methos: "PATCH",
+        method: "PATCH",
         body: data,
       }),
     }),
   }),
 });
+
+export const { useAutosaveProjectMutation } = ProjectApi;
