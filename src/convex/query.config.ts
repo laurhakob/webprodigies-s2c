@@ -186,3 +186,16 @@ export const ConsumeCreditsQuery = async ({
     profile,
   };
 };
+
+
+
+
+export const InspirationImagesQuery = async (projectId: string) => {
+  const images = await preloadQuery(
+    api.inspiration.getInspirationImages,
+    { projectId: projectId as Id<"projects"> },
+    { token: await convexAuthNextjsToken() }
+  )
+
+  return { images }
+}

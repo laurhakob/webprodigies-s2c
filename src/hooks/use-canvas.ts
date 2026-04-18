@@ -18,6 +18,7 @@ import {
   addEllipse,
   addFrame,
   addFreeDrawShape,
+  addGeneratedUI,
   addLine,
   addRect,
   addText,
@@ -32,6 +33,8 @@ import {
 } from "@/redux/slice/shapes";
 import { useState, useEffect, useRef } from "react";
 import { downloadBlob, generateFrameSnapshot } from "@/lib/frame-snapshot";
+import { nanoid } from "@reduxjs/toolkit";
+import { toast } from "sonner";
 
 interface TouchPointer {
   id: number;
@@ -1004,20 +1007,124 @@ export const useFrame = (shape: FrameShape) => {
 
       if (projectId) {
         formData.append("projectId", projectId);
-      }
 
-      // // TODO: use snapshot for AI generation
-      // console.log("Generated snapshot:", snapshot);
+        const response = await fetch("/api/generate", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(
+            `API request failed: ${response.status} ${response.statusText} - ${errorText}`
+          );
+        }
+
+        const generatedUIPosition = {
+          x: shape.x + shape.w + 50, // 50px spacing from frame
+          y: shape.y,
+          w: Math.max(400, shape.w), // At least 400px wide, or frame width if larger
+          h: Math.max(300, shape.h),
+        };
+
+        const generatedUIId = nanoid();
+
+        dispatch(
+          addGeneratedUI({
+            ...generatedUIPosition,
+            id: generatedUIId,
+            uiSpecData: null, // Start with null for live rendering
+            sourceFrameId: shape.id,
+          })
+        );
+
+        const reader = response.body?.getReader();
+
+        const decoder = new TextDecoder();
+
+        let accumulatedMarkup = "";
+
+        let lastUpdateTime = 0;
+
+        const UPDATE_THROTTLE_MS = 200;
+
+        if (reader) {
+          try {
+            while (true) {
+              const { done, value } = await reader.read();
+
+              if (done) {
+                // Update with final accumulated markup
+                dispatch(
+                  updateShape({
+                    id: generatedUIId,
+                    patch: {
+                      uiSpecData: accumulatedMarkup,
+                    },
+                  })
+                );
+                break;
+              }
+
+              const chunk = decoder.decode(value);
+              accumulatedMarkup += chunk;
+
+              const now = Date.now();
+
+              if (now - lastUpdateTime >= UPDATE_THROTTLE_MS) {
+                dispatch(
+                  updateShape({
+                    id: generatedUIId,
+                    patch: {
+                      uiSpecData: accumulatedMarkup,
+                    },
+                  })
+                );
+
+                lastUpdateTime = now;
+              }
+            }
+          } finally {
+            reader.releaseLock();
+          }
+        }
+      }
     } catch (error) {
-      // console.error("Frame generation failed:", error);
+      toast.error(
+        `Failed to generate UI design: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
+    } finally {
+      setIsGenerating(false);
     }
-    // finally {
-    //   setIsGenerating(false);
-    // }
   };
 
   return {
     isGenerating,
     handleGenerateDesign,
+  };
+};
+
+export const useInspiration = () => {
+  const [isInspirationOpen, setIsInspirationOpen] = useState(false);
+
+  const toggleInspiration = () => {
+    setIsInspirationOpen(!isInspirationOpen);
+  };
+
+  const openInspiration = () => {
+    setIsInspirationOpen(true);
+  };
+
+  const closeInspiration = () => {
+    setIsInspirationOpen(false);
+  };
+
+  return {
+    isInspirationOpen,
+    toggleInspiration,
+    openInspiration,
+    closeInspiration,
   };
 };

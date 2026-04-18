@@ -330,6 +330,8 @@ Return ONLY the HTML wrapped in <div data-generated-ui>. No explanations, no com
   },
 };
 
+
+
 // const userPrompt = `Use the user-provided styleGuide for all visual decisions: map its colors, typography scale, spacing, and radii directly to Tailwind v4 utilities (use arbitrary color classes like text-[#RRGGBB] / bg-[#RRGGBB] when hexes are given), enforce WCAG AA contrast (≥4.5:1 body, ≥3:1 large text), and if any token is missing fall back to neutral light defaults. Never invent new tokens; keep usage consistent across components.
 
 // Inspiration images (URLs):

@@ -12,6 +12,10 @@ export const Frame = ({
 }) => {
   const { isGenerating, handleGenerateDesign } = useFrame(shape);
 
+
+  
+
+
   return (
     <>
       <div
