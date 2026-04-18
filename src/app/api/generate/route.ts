@@ -178,6 +178,8 @@ On conflicts: the styleGuide always wins over image cues.
       },
     });
   } catch (error) {
+    console.error("Failed to generate UI design:", error);
+
     return NextResponse.json(
       {
         error: "Failed to generate UI design",

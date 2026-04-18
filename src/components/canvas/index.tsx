@@ -1,6 +1,10 @@
 "use client";
 
-import { useInfiniteCanvas, useInspiration } from "@/hooks/use-canvas";
+import {
+  useGlobalChat,
+  useInfiniteCanvas,
+  useInspiration,
+} from "@/hooks/use-canvas";
 import { TextSidebar } from "./text-sidebar";
 import { cn } from "@/lib/utils";
 import ShapeRenderer from "./shapes";
@@ -34,6 +38,9 @@ const InfiniteCanvas = (props: Props) => {
 
   const { isInspirationOpen, closeInspiration, toggleInspiration } =
     useInspiration();
+
+  const { isChatOpen, activeGeneratedUIId, generateWorkflow, exportDesign } =
+    useGlobalChat();
 
   const draftShape = getDraftShape();
   const freeDrawPoints = getFreeDrawPoints();
@@ -83,7 +90,7 @@ const InfiniteCanvas = (props: Props) => {
               shape={shape}
               toggleInspiration={toggleInspiration}
               //   toggleChat={toggleChat}
-              //   generateWorkflow={generateWorkflow}
+              generateWorkflow={generateWorkflow}
               //   exportDesign={exportDesign}
             />
           ))}
