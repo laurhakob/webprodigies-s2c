@@ -16,10 +16,9 @@ import { FreeDrawStrokePreview } from "./shapes/stroke/preview";
 import { ElipsePreview } from "./shapes/elipse/preview";
 import { SelectionOverlay } from "./shapes/selection";
 import InspirationSidebar from "./shapes/inspiration-sidebar";
+import ChatWindow from "./shapes/generatedui/chat";
 
-type Props = {};
-
-const InfiniteCanvas = (props: Props) => {
+const InfiniteCanvas = () => {
   const {
     viewport,
     shapes,
@@ -39,8 +38,14 @@ const InfiniteCanvas = (props: Props) => {
   const { isInspirationOpen, closeInspiration, toggleInspiration } =
     useInspiration();
 
-  const { isChatOpen, activeGeneratedUIId, generateWorkflow, exportDesign } =
-    useGlobalChat();
+  const {
+    isChatOpen,
+    activeGeneratedUIId,
+    generateWorkflow,
+    exportDesign,
+    toggleChat,
+    closeChat,
+  } = useGlobalChat();
 
   const draftShape = getDraftShape();
   const freeDrawPoints = getFreeDrawPoints();
@@ -52,6 +57,14 @@ const InfiniteCanvas = (props: Props) => {
         isOpen={isInspirationOpen}
         onClose={closeInspiration}
       />
+
+      {activeGeneratedUIId && (
+        <ChatWindow
+          generatedUIId={activeGeneratedUIId}
+          isOpen={isChatOpen}
+          onClose={closeChat}
+        />
+      )}
 
       <div
         ref={attachCanvasRef}
@@ -89,9 +102,9 @@ const InfiniteCanvas = (props: Props) => {
               key={shape.id}
               shape={shape}
               toggleInspiration={toggleInspiration}
-              //   toggleChat={toggleChat}
+              toggleChat={toggleChat}
               generateWorkflow={generateWorkflow}
-              //   exportDesign={exportDesign}
+              exportDesign={exportDesign}
             />
           ))}
 
