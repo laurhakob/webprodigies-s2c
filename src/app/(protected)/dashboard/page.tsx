@@ -20,23 +20,27 @@
 // import { redirect } from "next/navigation";
 
 // const Page = async () => {
-//   const { profileName } = await SubscriptionEntitlementQuery();
+//   const { entitlement, profileName } = await SubscriptionEntitlementQuery();
 
 //   if (!profileName) {
-//     redirect("/sign-in");
+//     redirect("/auth/sign-in");
 //   }
 
 //   const slug = combinedSlug(profileName!);
 
 //   if (!slug) {
-//     redirect("/sign-in");
+//     redirect("/auth/sign-in");
+//   }
+
+//   // If not subscribed, go to billing
+//   if (!entitlement._valueJSON) {
+//     redirect(`/billing/${slug}`);
 //   }
 
 //   redirect(`/dashboard/${slug}`);
 // };
 
 // export default Page;
-
 
 
 
@@ -57,7 +61,6 @@ const Page = async () => {
     redirect("/auth/sign-in");
   }
 
-  // If not subscribed, go to billing
   if (!entitlement._valueJSON) {
     redirect(`/billing/${slug}`);
   }

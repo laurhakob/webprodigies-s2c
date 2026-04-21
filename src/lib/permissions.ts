@@ -7,4 +7,4 @@ export const isBypassRoutes = [
   "/convex(.*)",
 ];
 
-export const isProtectedRoutes = ["/dashboard(.*)", "/"];
+export const isProtectedRoutes = ["/dashboard(.*)", "/billing(.*)", "/"];
