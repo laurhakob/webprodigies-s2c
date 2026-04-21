@@ -1,13 +1,36 @@
+// import { SubscriptionEntitlementQuery } from "@/convex/query.config";
+// import { combinedSlug } from "@/lib/utils";
+// import { redirect } from "next/navigation";
+
+// const Page = async () => {
+//   const { entitlement, profileName } = await SubscriptionEntitlementQuery();
+//   if (!entitlement._valueJSON) {
+//     redirect(`/billing/${combinedSlug(profileName!)}`);
+//   }
+//   redirect(`/dashboard/${combinedSlug(profileName!)}`);
+// };
+
+// export default Page;
+
+
 import { SubscriptionEntitlementQuery } from "@/convex/query.config";
 import { combinedSlug } from "@/lib/utils";
 import { redirect } from "next/navigation";
 
 const Page = async () => {
-  const { entitlement, profileName } = await SubscriptionEntitlementQuery();
-  if (!entitlement._valueJSON) {
-    redirect(`/billing/${combinedSlug(profileName!)}`);
+  const { profileName } = await SubscriptionEntitlementQuery();
+
+  if (!profileName) {
+    redirect("/sign-in");
   }
-  redirect(`/dashboard/${combinedSlug(profileName!)}`);
+
+  const slug = combinedSlug(profileName!);
+
+  if (!slug) {
+    redirect("/sign-in");
+  }
+
+  redirect(`/dashboard/${slug}`);
 };
 
 export default Page;

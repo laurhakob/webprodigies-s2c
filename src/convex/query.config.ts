@@ -198,4 +198,4 @@ export const InspirationImagesQuery = async (projectId: string) => {
   )
 
   return { images }
-}
+}    
