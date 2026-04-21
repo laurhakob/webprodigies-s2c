@@ -29,10 +29,15 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const rawProfile = await ProfileQuery();
-  const profile = normalizeProfile(
-    rawProfile._valueJSON as unknown as ConvexUserRaw | null
-  );
+  let profile = null;
+  try {
+    const rawProfile = await ProfileQuery();
+    profile = normalizeProfile(
+      rawProfile._valueJSON as unknown as ConvexUserRaw | null
+    );
+  } catch {
+    profile = null;
+  }
 
   return (
     <ConvexAuthNextjsServerProvider>

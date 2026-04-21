@@ -42,14 +42,21 @@
 
 // export default Page;
 
-
-
 import { SubscriptionEntitlementQuery } from "@/convex/query.config";
 import { combinedSlug } from "@/lib/utils";
 import { redirect } from "next/navigation";
 
 const Page = async () => {
-  const { entitlement, profileName } = await SubscriptionEntitlementQuery();
+  let entitlement = null;
+  let profileName = null;
+
+  try {
+    const result = await SubscriptionEntitlementQuery();
+    entitlement = result.entitlement;
+    profileName = result.profileName;
+  } catch {
+    redirect("/auth/sign-in");
+  }
 
   if (!profileName) {
     redirect("/auth/sign-in");
@@ -61,7 +68,7 @@ const Page = async () => {
     redirect("/auth/sign-in");
   }
 
-  if (!entitlement._valueJSON) {
+  if (!entitlement?._valueJSON) {
     redirect(`/billing/${slug}`);
   }
 
