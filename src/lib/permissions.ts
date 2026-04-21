@@ -1,4 +1,4 @@
-export const isPublicRoutes = ["/auth(.*)", "/"];
+export const isPublicRoutes = ["/auth(.*)"];
 
 export const isBypassRoutes = [
   "/api/polar/webhook",
@@ -7,4 +7,4 @@ export const isBypassRoutes = [
   "/convex(.*)",
 ];
 
-export const isProtectedRoutes = ["/dashboard(.*)"];
+export const isProtectedRoutes = ["/dashboard(.*)", "/"];
