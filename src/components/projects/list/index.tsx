@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const ProjectsList = () => {
   const { projects, canCreate } = useProjectCreation();
-  const user = useAppSelector((state) => state.profile);
+ const user = useAppSelector((state) => state.profile.user);
 
   if (!canCreate) {
     return (
