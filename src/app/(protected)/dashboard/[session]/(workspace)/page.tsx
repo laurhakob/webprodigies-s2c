@@ -23,12 +23,13 @@
 // export default Page;
 
 
-
 import ProjectsList from "@/components/projects/list";
 import ProjectsProvider from "@/components/projects/list/provider";
 import { ProjectsQuery } from "@/convex/query.config";
 import { redirect } from "next/navigation";
 import React from "react";
+
+export const dynamic = "force-dynamic";
 
 const Page = async () => {
   const { projects, profile } = await ProjectsQuery();
