@@ -20,29 +20,15 @@ const ColorSwatchSchema = z.object({
   description: z.string().optional(),
 });
 
-const PrimaryColorsSchema = z.object({
-  title: z.literal("Primary Colours"),
-  swatches: z.array(ColorSwatchSchema).length(4),
-});
-
-const SecondaryColorsSchema = z.object({
-  title: z.literal("Secondary & Accent Colors"),
-  swatches: z.array(ColorSwatchSchema).length(4),
-});
-
-const UIComponentColorsSchema = z.object({
-  title: z.literal("UI Component Colors"),
-  swatches: z.array(ColorSwatchSchema).length(6),
-});
-
-const UtilityColorsSchema = z.object({
-  title: z.literal("Utility & Form Colors"),
-  swatches: z.array(ColorSwatchSchema).length(3),
-});
-
-const StatusColorsSchema = z.object({
-  title: z.literal("Status & Feedback Colors"),
-  swatches: z.array(ColorSwatchSchema).length(2),
+const ColorSectionSchema = z.object({
+  title: z.enum([
+    "Primary Colours",
+    "Secondary & Accent Colors",
+    "UI Component Colors",
+    "Utility & Form Colors",
+    "Status & Feedback Colors",
+  ]),
+  swatches: z.array(ColorSwatchSchema),
 });
 
 const TypographyStyleSchema = z.object({
@@ -64,13 +50,7 @@ const StyleGuideSchema = z.object({
   theme: z.string(),
   description: z.string(),
 
-  colorSections: z.tuple([
-    PrimaryColorsSchema,
-    SecondaryColorsSchema,
-    UIComponentColorsSchema,
-    UtilityColorsSchema,
-    StatusColorsSchema,
-  ]),
+  colorSections: z.array(ColorSectionSchema).length(5),
 
   typographySections: z.array(TypographySectionSchema).length(3),
 });
@@ -163,6 +143,15 @@ Requirements:
 - Define typography system (font styles, hierarchy, weights)
 - Ensure everything is visually consistent and production-ready
 - Follow modern UI/UX design standards
+
+colorSections must contain exactly these 5 sections, in this order, with the exact titles and swatch counts shown:
+  1. "Primary Colours" — 4 swatches
+  2. "Secondary & Accent Colors" — 4 swatches
+  3. "UI Component Colors" — 6 swatches
+  4. "Utility & Form Colors" — 3 swatches
+  5. "Status & Feedback Colors" — 2 swatches
+
+typographySections must contain exactly 3 sections.
 
 Return ONLY valid JSON matching the provided schema. No explanation.
 `;
