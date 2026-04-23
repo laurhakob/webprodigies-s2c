@@ -66,7 +66,7 @@ Convex functions (`convex/*.ts`) are called server-side via `convex/nextjs` help
 ### AI Generation
 
 API routes in `src/app/api/generate/`:
-- `route.ts` — Main generation: takes canvas snapshot + style guide, streams Tailwind HTML using Gemini 2.5 Flash vision
+- `route.ts` — Main generation: takes canvas snapshot + style guide, streams Tailwind HTML using Gemini 2.5 Flash-Lite vision
 - `style/route.ts` — Style guide generation: analyzes mood board images, returns color palette + typography (Zod-validated)
 - `redesign/route.ts`, `workflow/route.ts`, `workflow-redesign/route.ts` — Variants for different generation modes
 

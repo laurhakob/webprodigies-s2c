@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
 
     // Create streaming response using the generative UI prompt
     const result = streamText({
-      model: google("gemini-2.5-flash"),
+      model: google("gemini-2.5-flash-lite"),
       messages: [
         {
           role: "user",

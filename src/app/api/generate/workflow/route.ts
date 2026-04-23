@@ -168,7 +168,7 @@ Please generate a complete, professional HTML page that serves as a ${selectedPa
 
     // Create streaming response for workflow page generation
     const result = streamText({
-      model: google("gemini-2.5-flash"),
+      model: google("gemini-2.5-flash-lite"),
       messages: [
         {
           role: "user",

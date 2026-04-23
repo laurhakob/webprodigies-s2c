@@ -107,7 +107,7 @@ Please generate the modified version of the provided workflow page HTML with the
 
     // Create streaming response for workflow page regeneration
     const result = streamText({
-      model: google("gemini-2.5-flash"),
+      model: google("gemini-2.5-flash-lite"),
       messages: [
         {
           role: "user",

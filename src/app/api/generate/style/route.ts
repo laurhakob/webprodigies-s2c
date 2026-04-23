@@ -157,7 +157,7 @@ Return ONLY valid JSON matching the provided schema. No explanation.
 `;
 
     const result = await generateObject({
-      model: google("gemini-2.5-flash"),
+      model: google("gemini-2.5-flash-lite"),
       schema: StyleGuideSchema,
       system: systemPrompt,
       messages: [
