@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
-import { anthropic } from "@ai-sdk/anthropic";
+import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
 import { prompts } from "@/prompts";
 import {
@@ -107,7 +107,7 @@ Please generate the modified version of the provided workflow page HTML with the
 
     // Create streaming response for workflow page regeneration
     const result = streamText({
-      model: anthropic("claude-opus-4-20250514"),
+      model: google("gemini-2.5-flash"),
       messages: [
         {
           role: "user",

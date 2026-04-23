@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^2.0.6",
+    "@ai-sdk/google": "^3.0.64",
     "@auth/core": "^0.37.0",
     "@base-ui/react": "^1.2.0",
     "@convex-dev/auth": "^0.0.91",

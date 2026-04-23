@@ -7,7 +7,7 @@ import { MoodBoardImage } from "@/hooks/use-styles";
 import { prompts } from "@/prompts";
 import { NextRequest, NextResponse } from "next/server";
 import { generateObject } from "ai";
-import { anthropic } from "@ai-sdk/anthropic";
+import { google } from "@ai-sdk/google";
 import z from "zod";
 import { fetchMutation } from "convex/nextjs";
 import { api } from "../../../../../convex/_generated/api";
@@ -168,7 +168,7 @@ Return ONLY valid JSON matching the provided schema. No explanation.
 `;
 
     const result = await generateObject({
-      model: anthropic("claude-sonnet-4-20250514"),
+      model: google("gemini-2.5-flash"),
       schema: StyleGuideSchema,
       system: systemPrompt,
       messages: [

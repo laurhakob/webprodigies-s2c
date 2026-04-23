@@ -5,7 +5,7 @@ import {
   StyleGuideQuery,
 } from "@/convex/query.config";
 import { prompts } from "@/prompts";
-import { anthropic } from "@ai-sdk/anthropic";
+import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -126,7 +126,7 @@ On conflicts: the styleGuide always wins over image cues.
     `;
 
     const result = streamText({
-      model: anthropic("claude-opus-4-20250514"),
+      model: google("gemini-2.5-flash"),
 
       messages: [
         {

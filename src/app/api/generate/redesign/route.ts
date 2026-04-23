@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { anthropic } from "@ai-sdk/anthropic";
+import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
 import { prompts } from "@/prompts";
 import {
@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
 
     // Create streaming response using the generative UI prompt
     const result = streamText({
-      model: anthropic("claude-opus-4-20250514"),
+      model: google("gemini-2.5-flash"),
       messages: [
         {
           role: "user",

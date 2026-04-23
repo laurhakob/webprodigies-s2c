@@ -19,7 +19,7 @@ npx convex dev     # Run Convex backend in watch mode
 
 ## Architecture Overview
 
-This is an AI-powered UI design generation SaaS. Users sketch on an infinite canvas, build style guides from mood boards, and generate production-ready Tailwind HTML via Claude AI.
+This is an AI-powered UI design generation SaaS. Users sketch on an infinite canvas, build style guides from mood boards, and generate production-ready Tailwind HTML via Google Gemini.
 
 ### Routing
 
@@ -66,7 +66,7 @@ Convex functions (`convex/*.ts`) are called server-side via `convex/nextjs` help
 ### AI Generation
 
 API routes in `src/app/api/generate/`:
-- `route.ts` — Main generation: takes canvas snapshot + style guide, streams Tailwind HTML using Claude Opus 4 vision
+- `route.ts` — Main generation: takes canvas snapshot + style guide, streams Tailwind HTML using Gemini 2.5 Flash vision
 - `style/route.ts` — Style guide generation: analyzes mood board images, returns color palette + typography (Zod-validated)
 - `redesign/route.ts`, `workflow/route.ts`, `workflow-redesign/route.ts` — Variants for different generation modes
 
@@ -104,7 +104,7 @@ npx shadcn@latest add <component>
 ```
 CONVEX_DEPLOYMENT=             # Convex project slug
 NEXT_PUBLIC_CONVEX_URL=        # Public Convex endpoint
-ANTHROPIC_API_KEY=             # Claude API key
+GOOGLE_GENERATIVE_AI_API_KEY=  # Google Gemini API key
 POLAR_ACCESS_TOKEN=            # Polar.sh API token
 POLAR_WEBHOOK_SECRET=          # Polar.sh webhook secret
 INNGEST_SIGNING_KEY=           # Inngest signing key

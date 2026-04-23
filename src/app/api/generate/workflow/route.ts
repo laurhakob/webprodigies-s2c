@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { anthropic } from "@ai-sdk/anthropic";
+import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
 import { prompts } from "@/prompts";
 import {
@@ -168,7 +168,7 @@ Please generate a complete, professional HTML page that serves as a ${selectedPa
 
     // Create streaming response for workflow page generation
     const result = streamText({
-      model: anthropic("claude-opus-4-20250514"),
+      model: google("gemini-2.5-flash"),
       messages: [
         {
           role: "user",
